@@ -2,7 +2,7 @@ package com.andersen.sadwyn.databinding;
 
 import android.app.Application;
 
-import com.andersen.sadwyn.databinding.network.Api;
+import com.andersen.sadwyn.databinding.model.network.Api;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import retrofit2.Retrofit;

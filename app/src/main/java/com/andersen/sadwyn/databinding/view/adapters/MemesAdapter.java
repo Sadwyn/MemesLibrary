@@ -1,4 +1,4 @@
-package com.andersen.sadwyn.databinding.views.adapters;
+package com.andersen.sadwyn.databinding.view.adapters;
 
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.andersen.sadwyn.databinding.data.Meme;
+import com.andersen.sadwyn.databinding.model.pojo.Meme;
 import com.andersen.sadwyn.databinding.databinding.MemItemBinding;
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

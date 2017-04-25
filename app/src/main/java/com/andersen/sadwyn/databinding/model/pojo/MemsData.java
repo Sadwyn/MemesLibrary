@@ -1,7 +1,6 @@
 
-package com.andersen.sadwyn.databinding.data;
+package com.andersen.sadwyn.databinding.model.pojo;
 
-import com.andersen.sadwyn.databinding.data.Data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

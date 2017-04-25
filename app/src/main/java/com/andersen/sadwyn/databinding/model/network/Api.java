@@ -1,6 +1,6 @@
-package com.andersen.sadwyn.databinding.network;
+package com.andersen.sadwyn.databinding.model.network;
 
-import com.andersen.sadwyn.databinding.data.MemsData;
+import com.andersen.sadwyn.databinding.model.pojo.MemsData;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

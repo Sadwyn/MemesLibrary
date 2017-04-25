@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.andersen.sadwyn.databinding.MainActivity">
+    tools:context="com.andersen.sadwyn.databinding.view.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
