@@ -3,6 +3,7 @@ package com.andersen.sadwyn.databinding.views.adapters;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +12,13 @@ import android.widget.ImageView;
 import com.andersen.sadwyn.databinding.data.Meme;
 import com.andersen.sadwyn.databinding.databinding.MemItemBinding;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by Sadwyn on 24.04.2017.
- */
 
-public class MemesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MemViewHolder> {
     private List<Meme> memList;
 
     public MemesAdapter(List<Meme> memList) {
@@ -32,18 +26,19 @@ public class MemesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         MemItemBinding binding = MemItemBinding.inflate(inflater, parent, false);
         return new MemViewHolder(binding.getRoot());
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(MemViewHolder holder, int position) {
         Meme meme = memList.get(position);
-        ((MemViewHolder)holder).binding.setMeme(meme);
-        ((MemViewHolder)holder).binding.executePendingBindings();
+        Log.i("BIND", String.valueOf(position) );
+        holder.binding.setMeme(meme);
     }
+
 
 
     @Override
@@ -63,9 +58,8 @@ public class MemesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-
     @BindingAdapter("bind:imageUrl")
     public static void loadImage(ImageView imageView, String v) {
-        Glide.with(imageView.getContext().getApplicationContext()).load(v).fitCenter().into(imageView);
+        Glide.with(imageView.getContext().getApplicationContext()).load(v).centerCrop().into(imageView);
     }
 }

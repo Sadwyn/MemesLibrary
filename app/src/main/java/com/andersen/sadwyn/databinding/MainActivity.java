@@ -20,10 +20,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
+
         App.getApi().getMemes().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<MemsData>() {
                     @Override
                     public void accept(MemsData memsData) throws Exception {
+                        recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         MemesAdapter adapter = new MemesAdapter(memsData.getData().getMemes());
                         recyclerView.setAdapter(adapter);
