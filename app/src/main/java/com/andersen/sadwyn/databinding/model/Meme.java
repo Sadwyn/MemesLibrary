@@ -1,9 +1,12 @@
 
-package com.andersen.sadwyn.databinding.model.pojo;
+package com.andersen.sadwyn.databinding.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Meme {
 
     @SerializedName("id")

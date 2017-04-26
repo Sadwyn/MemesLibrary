@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="meme"
-            type="com.andersen.sadwyn.databinding.data.Meme"/>
+            name="ItemMainVM"
+            type="com.andersen.sadwyn.databinding.viewmodel.ItemMainVM"/>
     </data>
 <RelativeLayout
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:id="@+id/itemMem"
     >
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:imageUrl="@{meme.getUrl}" />
+        android:onClick="@{ItemMainVM::saveImage}"
+        app:imageUrl = "@{ItemMainVM.memeUrl}"
+       />
 </RelativeLayout>
 </layout>

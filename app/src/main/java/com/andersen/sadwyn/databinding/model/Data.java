@@ -1,5 +1,5 @@
 
-package com.andersen.sadwyn.databinding.model.pojo;
+package com.andersen.sadwyn.databinding.model;
 
 import java.util.List;
 

@@ -1,36 +1,74 @@
 package com.andersen.sadwyn.databinding.view;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.andersen.sadwyn.databinding.R;
-import com.andersen.sadwyn.databinding.model.pojo.MemsData;
-import com.andersen.sadwyn.databinding.model.Model;
-import com.andersen.sadwyn.databinding.model.ModelImpl;
-import com.andersen.sadwyn.databinding.view.adapters.MemesAdapter;
+import com.andersen.sadwyn.databinding.databinding.ActivityMainBinding;
+import com.andersen.sadwyn.databinding.viewmodel.MainActivityVM;
 
-import io.reactivex.functions.Consumer;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+
+/**
+ * Created by Sadwyn on 26.04.2017.
+ */
+
+public class MainActivity extends AppCompatActivity implements Observer{
+
+    private ActivityMainBinding activityMainBinding;
+    private MainActivityVM mainActivityVM;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        initDataBinding();
+        setupRecyclerView(activityMainBinding.recycler);
+        setupObserver(mainActivityVM);
+    }
 
-        Model model = ModelImpl.getInstance();
-        model.getImages().doOnNext(new Consumer<MemsData>() {
-            @Override
-            public void accept(MemsData memsData) throws Exception {
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                MemesAdapter adapter = new MemesAdapter(memsData.getData().getMemes());
-                recyclerView.setAdapter(adapter);
-            }
-        }).subscribe();
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mainActivityVM.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i("onSaveInstanceState", "Save");
+        mainActivityVM.onSaveInstanceState(outState);
+    }
+
+    private void initDataBinding() {
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mainActivityVM = new MainActivityVM();
+        activityMainBinding.setMainActivityVM(mainActivityVM);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof MainActivityVM) {
+            MemesAdapter peopleAdapter = (MemesAdapter) activityMainBinding.recycler.getAdapter();
+            MainActivityVM peopleViewModel = (MainActivityVM) o;
+            peopleAdapter.setMemList(peopleViewModel.getMemes());
+        }
+    }
+
+
+    private void setupRecyclerView(RecyclerView recyclerView) {
+        MemesAdapter adapter = new MemesAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void setupObserver(Observable observable) {
+        observable.addObserver(this);
     }
 }
