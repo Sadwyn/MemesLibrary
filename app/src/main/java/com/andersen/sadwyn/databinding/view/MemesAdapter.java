@@ -1,5 +1,6 @@
 package com.andersen.sadwyn.databinding.view;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -49,7 +50,7 @@ public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MemViewHolde
 
 
 
-    public static class MemViewHolder extends RecyclerView.ViewHolder {
+    public  class MemViewHolder extends RecyclerView.ViewHolder {
          ItemMemBinding binding;
 
         public MemViewHolder(ItemMemBinding memItemBinding) {

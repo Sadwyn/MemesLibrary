@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.andersen.sadwyn.databinding.R;
 import com.andersen.sadwyn.databinding.databinding.ActivityMainBinding;
@@ -46,10 +47,17 @@ public class MainActivity extends AppCompatActivity implements Observer{
         mainActivityVM.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mainActivityVM.onDestroy();
+    }
+
     private void initDataBinding() {
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainActivityVM = new MainActivityVM();
         activityMainBinding.setMainActivityVM(mainActivityVM);
+
     }
 
     @Override
